@@ -113,7 +113,7 @@ async def graph_search_reasoning(question:str, grag_method:GraphRAGBase):
     logging.info(f"Evidence Verification: {text_verification_result}")
     
     # Query Expansion
-    if "yes" in normalize(text_verification_result):
+    if "no" in normalize(text_verification_result):
         query_expansion_result = await query_expansion(question, text_query_history_str, text_final_answer, text_verification_result)
         expanded_queries = parse_expanded_queries(query_expansion_result)
     
@@ -162,7 +162,7 @@ async def graph_search_reasoning(question:str, grag_method:GraphRAGBase):
     kg_verification_result = await evidence_verification(question, kg_query_history_str, kg_final_answer)
     logging.info(f"KG Evidence Verification: {kg_verification_result}")
     # Query Expansion
-    if "yes" in normalize(kg_verification_result):
+    if "no" in normalize(kg_verification_result):
         query_expansion_result = await query_expansion(question, kg_query_history_str, kg_final_answer, kg_verification_result)
         expanded_queries = parse_expanded_queries(query_expansion_result)
     
